@@ -1,14 +1,14 @@
 import React from 'react';
 import {Container, Header, HeaderTitle, Total} from './styles';
 
-const ResumeItem = ({title, Icon}) => {
+const ResumeItem = ({title, Icon, value}) => {
     return (
         <Container>
             <Header>
                 <HeaderTitle>{title}</HeaderTitle>
                 <Icon />
             </Header>
-            <Total>1000</Total>
+            <Total>{value}</Total>
         </Container>
     );
 };
