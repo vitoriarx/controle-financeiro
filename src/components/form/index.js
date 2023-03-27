@@ -41,11 +41,13 @@ const Form = () => {
 
                     <Input type='radio' id='rExpenses' name='group1' onChange={() => setExpense(!isExpense)} />
                     <Label htmlFor='rExpenses'>Saída</Label>
+
+                    <Button onClick={handleSave}>ADICIONAR</Button>
                 </RadioGroup>
             </Container>
 
             <RadioGroup />
-            <Button onClick={handleSave}>ADICIONAR</Button>
+            
         </>
     )
 };

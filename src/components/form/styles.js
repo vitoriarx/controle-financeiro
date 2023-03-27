@@ -40,13 +40,15 @@ export const RadioGroup = styled.div`
 
     input {
         margin-left: 20px;
+        margin-right: 5px;
         accent-color: black;
         margin-top: 0;
     }
 `;
 
 export const Button = styled.button`
-    padding: 5px 10px;
+    padding: 10px 10px;
+    margin: 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
