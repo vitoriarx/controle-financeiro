@@ -2,11 +2,12 @@ import React, {useState} from 'react';
 import {Container, InputContent, Label, Input, RadioGroup, Button} from "./styles"
 
 
-const Form = () => {
+const Form = ({handleAdd}) => {
     const [desc, setDesc] = useState("");
     const [amount, setAmount] = useState("");
     const [isExpense, setExpense] = useState(false);
 
+    const generateId = () => Math.round(Math.random()* 1000);
     const handleSave =() => {
         if(!desc || !amount){
             alert("Informe a descrição e o valor!");
@@ -15,13 +16,27 @@ const Form = () => {
             alert("O valor tem que ser positivo!");
             return;
         }
-    }
+    
+
+        const transaction = {
+            id: generateId(),
+            desc: desc,
+            amount: amount,
+            expense: isExpense,
+        };
+
+        handleAdd(transaction);
+
+        setDesc("");
+        setAmount("");
+    };
+
     return(
         <>
             <Container>
                 <InputContent>
                     <Label>Descrição </Label>
-                    <Input value={desc} onChange={(e) => setDesc(e.target.valeu)}/>
+                    <Input value={desc} onChange={(e) => setDesc(e.target.value)}/>
                 </InputContent>
 
                 <InputContent>

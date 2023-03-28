@@ -27,6 +27,7 @@ const App = () => {
         const expense = amountExpense.reduce((acc, cur) => acc + cur, 0).toFixed(2);
         const income = amountIncome.reduce((acc, cur) => acc + cur, 0).toFixed(2);
 
+        const total = Math.abs(income - expense).toFixed(2);
         setIncome(`R$ ${income}`);
         setExpense(`R$ ${expense}`);
         setTotal(`${Number(income)< Number(expense) ? "-" : ""}R$ ${total}`);
@@ -44,7 +45,7 @@ const App = () => {
         <>
             <Header />
             <Resume income={income} expense={expense} total={total} />
-            <Form />
+            <Form handleAdd={handleAdd} />
             <GlobalStyle />
         </>
     )
