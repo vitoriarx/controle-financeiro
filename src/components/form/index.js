@@ -1,70 +1,73 @@
-import React, {useState} from 'react';
-import {Container, InputContent, Label, Input, RadioGroup, Button} from "./styles"
+import React, { useState } from "react";
+import Grid from "../grid"
+import * as C from "./styles";
 
+const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
+  const [desc, setDesc] = useState("");
+  const [amount, setAmount] = useState("");
+  const [isExpense, setExpense] = useState(false);
 
-const Form = ({handleAdd}) => {
-    const [desc, setDesc] = useState("");
-    const [amount, setAmount] = useState("");
-    const [isExpense, setExpense] = useState(false);
+  const generateID = () => Math.round(Math.random() * 1000);
 
-    const generateId = () => Math.round(Math.random()* 1000);
-    const handleSave =() => {
-        if(!desc || !amount){
-            alert("Informe a descrição e o valor!");
-            return;
-        } else if(amount < 1){
-            alert("O valor tem que ser positivo!");
-            return;
-        }
-    
+  const handleSave = () => {
+    if (!desc || !amount) {
+      alert("Informe a descrição e o valor!");
+      return;
+    } else if (amount < 1) {
+      alert("O valor tem que ser positivo!");
+      return;
+    }
 
-        const transaction = {
-            id: generateId(),
-            desc: desc,
-            amount: amount,
-            expense: isExpense,
-        };
-
-        handleAdd(transaction);
-
-        setDesc("");
-        setAmount("");
+    const transaction = {
+      id: generateID(),
+      desc: desc,
+      amount: amount,
+      expense: isExpense,
     };
 
-    return(
-        <>
-            <Container>
-                <InputContent>
-                    <Label>Descrição </Label>
-                    <Input value={desc} onChange={(e) => setDesc(e.target.value)}/>
-                </InputContent>
+    handleAdd(transaction);
 
-                <InputContent>
-                    <Label>Valor</Label>
-                    <Input value={amount}
-                    type="number" 
-                    onChange={(e) => setAmount(e.target.value)}/>
-                </InputContent>
+    setDesc("");
+    setAmount("");
+  };
 
-                <RadioGroup>
-                    <Input type="radio" 
-                    id='rIncome' 
-                    defaultChecked name='group1' 
-                    onChange={() => setExpense(!isExpense)}/>
-                    <Label htmlFor='rIncome'>Entrada</Label>
-
-
-                    <Input type='radio' id='rExpenses' name='group1' onChange={() => setExpense(!isExpense)} />
-                    <Label htmlFor='rExpenses'>Saída</Label>
-
-                    <Button onClick={handleSave}>ADICIONAR</Button>
-                </RadioGroup>
-            </Container>
-
-            <RadioGroup />
-            
-        </>
-    )
+  return (
+    <>
+      <C.Container>
+        <C.InputContent>
+          <C.Label>Descrição</C.Label>
+          <C.Input value={desc} onChange={(e) => setDesc(e.target.value)} />
+        </C.InputContent>
+        <C.InputContent>
+          <C.Label>Valor</C.Label>
+          <C.Input
+            value={amount}
+            type="number"
+            onChange={(e) => setAmount(e.target.value)}
+          />
+        </C.InputContent>
+        <C.RadioGroup>
+          <C.Input
+            type="radio"
+            id="rIncome"
+            defaultChecked
+            name="group1"
+            onChange={() => setExpense(!isExpense)}
+          />
+          <C.Label htmlFor="rIncome">Entrada</C.Label>
+          <C.Input
+            type="radio"
+            id="rExpenses"
+            name="group1"
+            onChange={() => setExpense(!isExpense)}
+          />
+          <C.Label htmlFor="rExpenses">Saída</C.Label>
+        </C.RadioGroup>
+        <C.Button onClick={handleSave}>ADICIONAR</C.Button>
+      </C.Container>
+      <Grid itens={transactionsList} setItens={setTransactionsList} />
+    </>
+  );
 };
 
 export default Form;
